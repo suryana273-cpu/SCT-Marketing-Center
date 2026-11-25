@@ -1,0 +1,33 @@
+
+name: Build SCT APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+
+      - name: Extract project
+        run: unzip -o SCT-Marketing-Center-Android-Project.zip
+
+      - name: Build APK
+        run: gradle -p SCT-Marketing-Center assembleDebug
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SCT-Marketing-Center-APK
+          path: SCT-Marketing-Center/app/build/outputs/apk/debug/app-debug.apk
