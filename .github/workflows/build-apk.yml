@@ -22,8 +22,7 @@ jobs:
           gradle-version: '8.9'
 
       - name: Extract project
-        run: unzip -o SCT-Marketing-Center-Android-Project.zip
-
+        run: unzip -o SCT-Marketing-Center-Android-Project-REVISI.zip
       - name: Build APK
         run: gradle -p SCT-Marketing-Center assembleDebug
 
